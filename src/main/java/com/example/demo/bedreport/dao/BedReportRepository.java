@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface BedReportRepository extends ElasticsearchRepository<BedReport, String> {
 
-    List<BedReport> findByEstadoAndMunicipio(String state, String city);
+    List<BedReport> findByEstadoLikeAndMunicipioLike(String state, String city);
 }

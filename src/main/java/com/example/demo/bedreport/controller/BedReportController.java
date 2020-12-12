@@ -16,11 +16,6 @@ public class BedReportController {
         this.bedReportService = bedReportService;
     }
 
-    @GetMapping
-    public Iterable<BedReport> getBedReports() {
-        return bedReportService.findAll();
-    }
-
     @GetMapping("/search")
     public Iterable<BedReport> getBedReportsByStateAndCity(@RequestParam("state") String state, @RequestParam("city") String city) {
         return bedReportService.findByEstadoAndMunicipio(state, city);
