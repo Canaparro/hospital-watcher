@@ -1,0 +1,19 @@
+{
+  "name": "hospital-watcher",
+  "version": "1.0.0",
+  "description": "Frontend application for hospital-watcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Canaparro/hospital-watcher.git"
+  },
+  "author": "Marcelo Canaparro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Canaparro/hospital-watcher/issues"
+  },
+  "homepage": "https://github.com/Canaparro/hospital-watcher#readme"
+}
