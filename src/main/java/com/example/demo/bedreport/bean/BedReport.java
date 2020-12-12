@@ -13,10 +13,8 @@ public class BedReport {
 
     @Id
     private String id;
-    @Field(type = Text, fielddata = true)
     private String estado;
     private String estadoSigla;
-    @Field(type = Text, fielddata = true)
     private String municipio;
     private String cnes;
     private String nomeCnes;
