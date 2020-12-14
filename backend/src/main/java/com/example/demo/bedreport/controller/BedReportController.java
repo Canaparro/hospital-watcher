@@ -20,6 +20,7 @@ public class BedReportController {
         this.bedReportService = bedReportService;
     }
 
+    @CrossOrigin({"http://localhost:3000"})
     @GetMapping
     public ResponseEntity<Iterable<BedReport>> search(
             @RequestParam(value = "state", required = false) String state,

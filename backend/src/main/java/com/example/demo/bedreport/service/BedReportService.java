@@ -28,13 +28,14 @@ public class BedReportService {
         this.elasticsearchOperations = elasticsearchOperations;
     }
 
+    //TODO: BREAK DOWN TO MAKE TESTS
     public SearchHits<BedReport> search(String state, String city, String hospital, Integer page, Integer size) {
         BoolQueryBuilder queryBuilder = boolQuery();
-        if (state != null)
+        if (state != null && !state.isBlank())
             queryBuilder.must(matchQuery(BedReport.STATE, state).operator(Operator.AND).fuzziness(Fuzziness.TWO));
-        if (city != null)
+        if (city != null && !city.isBlank())
             queryBuilder.must(matchQuery(BedReport.CITY, city).operator(Operator.AND).fuzziness(Fuzziness.TWO));
-        if (hospital != null)
+        if (hospital != null && ! hospital.isBlank())
             queryBuilder.must(matchQuery(BedReport.HOSPITAL, hospital).operator(Operator.AND).fuzziness(Fuzziness.TWO));
         return elasticsearchOperations.search(getPageableNativeSearchQuery(page, size, queryBuilder), BedReport.class);
     }
