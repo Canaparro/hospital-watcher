@@ -1,5 +1,5 @@
-import './App.css';
-import Search from './components/Search'
+import './App.css'
+import Search from './components/search/Search'
 import * as api from './api'
 import React, { useState, useEffect } from 'react'
 
@@ -29,8 +29,8 @@ function App() {
           Este é um site para buscar informações de ocupação de leitos em hospitais. 
           A informação provida é de responsabilidade do governo.
         </p>
-        <Search city={location.city} state={location.state}/>
       </header>
+      <Search city={location.city} state={location.state}/>
     </div>
   );
 }
