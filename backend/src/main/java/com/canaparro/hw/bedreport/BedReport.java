@@ -1,4 +1,4 @@
-package com.example.demo.bedreport.bean;
+package com.canaparro.hw.bedreport;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

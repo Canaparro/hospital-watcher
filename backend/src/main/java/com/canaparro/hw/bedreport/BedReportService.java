@@ -1,6 +1,5 @@
-package com.example.demo.bedreport.service;
+package com.canaparro.hw.bedreport;
 
-import com.example.demo.bedreport.bean.BedReport;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.Operator;
@@ -30,6 +29,11 @@ public class BedReportService {
 
     //TODO: BREAK DOWN TO MAKE TESTS
     public SearchHits<BedReport> search(String state, String city, String hospital, Integer page, Integer size) {
+        BoolQueryBuilder queryBuilder = buildQueryByParameters(state, city, hospital);
+        return elasticsearchOperations.search(getPageableNativeSearchQuery(page, size, queryBuilder), BedReport.class);
+    }
+
+    BoolQueryBuilder buildQueryByParameters(String state, String city, String hospital) {
         BoolQueryBuilder queryBuilder = boolQuery();
         if (state != null && !state.isBlank())
             queryBuilder.must(matchQuery(BedReport.STATE, state).operator(Operator.AND).fuzziness(Fuzziness.TWO));
@@ -37,7 +41,7 @@ public class BedReportService {
             queryBuilder.must(matchQuery(BedReport.CITY, city).operator(Operator.AND).fuzziness(Fuzziness.TWO));
         if (hospital != null && ! hospital.isBlank())
             queryBuilder.must(matchQuery(BedReport.HOSPITAL, hospital).operator(Operator.AND).fuzziness(Fuzziness.TWO));
-        return elasticsearchOperations.search(getPageableNativeSearchQuery(page, size, queryBuilder), BedReport.class);
+        return queryBuilder;
     }
 
     private NativeSearchQuery getPageableNativeSearchQuery(Integer page, Integer size, QueryBuilder queryBuilder) {
