@@ -8,21 +8,20 @@ function App() {
   const [location, setLocation] = useState("")
   
   useEffect(() => {
-    function geoLocation() {
+    function getLocation() {
       if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getGeolocation, error)
+        navigator.geolocation.getCurrentPosition((position) => {
+          getGeolocation(position);
+      }, (error) => alert(error.message)
+      , { timeout:2000 });
       }
-    }
-
-    function error(positionError) {
-      console.log(positionError)
     }
   
     function getGeolocation(position) {
       api.getLocation(setLocation, position.coords.latitude, position.coords.longitude)
     }
-
-    geoLocation()
+  
+    getLocation()  
   }, []);
 
   return (
