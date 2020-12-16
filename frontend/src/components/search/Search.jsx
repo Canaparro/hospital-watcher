@@ -10,11 +10,11 @@ function Search(props) {
     const [city, setCity] = useState()
     const [hospital, setHospital] = useState()
 
-    useEffect(() => {
+    useEffect((city, state) => {
         setState(props.state)
         setCity(props.city)
-        api.getReports(setResult, state, city, hospital)
-      }, [props.city, props.state, state, city, hospital])
+        api.getReports(setResult, state, city, null)
+      }, [props.city, props.state])
 
     return (
         <div className='search-grouper'>

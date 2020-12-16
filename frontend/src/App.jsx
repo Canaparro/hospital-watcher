@@ -10,8 +10,12 @@ function App() {
   useEffect(() => {
     function geoLocation() {
       if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getGeolocation)
+        navigator.geolocation.getCurrentPosition(getGeolocation, error)
       }
+    }
+
+    function error(positionError) {
+      console.log(positionError)
     }
   
     function getGeolocation(position) {
