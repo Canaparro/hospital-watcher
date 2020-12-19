@@ -1,5 +1,7 @@
-package com.example.demo.bedreport.bean;
+package com.canaparro.hw.bedreport;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
@@ -40,6 +42,7 @@ public class BedReport {
     private String hospitalName;
 
     @Field(value = LAST_MODIFICATION_DATE, type = FieldType.Date, format = DateFormat.date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime lastModificationDate;
 
     @Field("ofertaRespiradores")

@@ -1,6 +1,5 @@
-package com.example.demo.bedreport.service;
+package com.canaparro.hw.bedreport;
 
-import com.example.demo.bedreport.bean.BedReport;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.Operator;
@@ -30,18 +29,22 @@ public class BedReportService {
         this.elasticsearchOperations = elasticsearchOperations;
     }
 
-    //TODO: BREAK DOWN TO MAKE TESTS
     public SearchHits<BedReport> search(String state, String city, String hospital, Integer page, Integer size, LocalDateTime fromDate) {
-        BoolQueryBuilder queryBuilder = boolQuery();
-        if (fromDate != null) //&& !fromDate.isBlank())
-            queryBuilder.must(rangeQuery(BedReport.LAST_MODIFICATION_DATE).gt(fromDate));//.parse(fromDate)));
-        if (state != null && !state.isBlank())
-            queryBuilder.must(matchQuery(BedReport.STATE, state).operator(Operator.AND).fuzziness(Fuzziness.TWO));
-        if (city != null && !city.isBlank())
-            queryBuilder.must(matchQuery(BedReport.CITY, city).operator(Operator.AND).fuzziness(Fuzziness.TWO));
-        if (hospital != null && ! hospital.isBlank())
-            queryBuilder.must(matchQuery(BedReport.HOSPITAL, hospital).operator(Operator.AND).fuzziness(Fuzziness.TWO));
+        BoolQueryBuilder queryBuilder = buildQueryByParameters(state, city, hospital, fromDate);
         return elasticsearchOperations.search(getPageableNativeSearchQuery(page, size, queryBuilder), BedReport.class);
+    }
+
+    BoolQueryBuilder buildQueryByParameters(String state, String city, String hospital, LocalDateTime fromDate) {
+        BoolQueryBuilder queryBuilder = boolQuery();
+        if (fromDate != null)
+            queryBuilder.must(rangeQuery(BedReport.LAST_MODIFICATION_DATE).gt(fromDate));
+        if (state != null && !state.isBlank())
+            queryBuilder.must(matchQuery(BedReport.STATE, state).operator(Operator.AND).fuzziness(Fuzziness.ONE));
+        if (city != null && !city.isBlank())
+            queryBuilder.must(matchQuery(BedReport.CITY, city).operator(Operator.AND).fuzziness(Fuzziness.ONE));
+        if (hospital != null && ! hospital.isBlank())
+            queryBuilder.must(matchQuery(BedReport.HOSPITAL, hospital).operator(Operator.AND).fuzziness(Fuzziness.ONE));
+        return queryBuilder;
     }
 
     private NativeSearchQuery getPageableNativeSearchQuery(Integer page, Integer size, QueryBuilder queryBuilder) {

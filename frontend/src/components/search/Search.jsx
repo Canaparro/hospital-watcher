@@ -19,7 +19,7 @@ function Search(props) {
     function getFromDate() {
         let now = new Date()
         let fromDate = now
-        fromDate.setDate(now.getDate() + 1)
+        fromDate.setDate(now.getDate() - 3)
         return fromDate.toISOString().replace('Z', '')
     }
 

@@ -1,4 +1,4 @@
-package com.example.demo.bedreport.configuration;
+package com.canaparro.hw.configuration;
 
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;

@@ -1,7 +1,5 @@
-package com.example.demo.bedreport.controller;
+package com.canaparro.hw.bedreport;
 
-import com.example.demo.bedreport.bean.BedReport;
-import com.example.demo.bedreport.service.BedReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.http.HttpStatus;
