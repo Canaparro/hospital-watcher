@@ -19,6 +19,7 @@ public class BedReport {
     public static final String STATE = "estado";
     public static final String CITY = "municipio";
     public static final String HOSPITAL = "nomeCnes";
+    public static final String LAST_MODIFICATION_DATE = "dataNotificacaoOcupacao";
 
     @Id
     private String id;
@@ -38,7 +39,7 @@ public class BedReport {
     @Field(HOSPITAL)
     private String hospitalName;
 
-    @Field(value = "dataNotificacaoOcupacao", type = FieldType.Date, format = DateFormat.date_time)
+    @Field(value = LAST_MODIFICATION_DATE, type = FieldType.Date, format = DateFormat.date_time)
     private LocalDateTime lastModificationDate;
 
     @Field("ofertaRespiradores")

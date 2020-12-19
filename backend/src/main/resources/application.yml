@@ -1,3 +1,6 @@
+spring:
+  jackson:
+    date-format:
 br:
   gov:
     data:

@@ -13,8 +13,10 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.stereotype.Service;
 
-import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
-import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 @Service
 public class BedReportService {
@@ -29,8 +31,10 @@ public class BedReportService {
     }
 
     //TODO: BREAK DOWN TO MAKE TESTS
-    public SearchHits<BedReport> search(String state, String city, String hospital, Integer page, Integer size) {
+    public SearchHits<BedReport> search(String state, String city, String hospital, Integer page, Integer size, LocalDateTime fromDate) {
         BoolQueryBuilder queryBuilder = boolQuery();
+        if (fromDate != null) //&& !fromDate.isBlank())
+            queryBuilder.must(rangeQuery(BedReport.LAST_MODIFICATION_DATE).gt(fromDate));//.parse(fromDate)));
         if (state != null && !state.isBlank())
             queryBuilder.must(matchQuery(BedReport.STATE, state).operator(Operator.AND).fuzziness(Fuzziness.TWO));
         if (city != null && !city.isBlank())

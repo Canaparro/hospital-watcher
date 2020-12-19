@@ -4,11 +4,12 @@ const reportClient = axios.create({
     baseURL: 'http://localhost:8080/api/v1'
 })
 
-export function getReports (callback, state, city, hospital) {
+export function getReports (callback, state, city, hospital, fromDate) {
     let params = {
         state,
         city,
-        hospital
+        hospital,
+        fromDate
     }
     reportClient.get('/bedreports', {
         params
