@@ -1,7 +1,9 @@
-const axios = require('axios').default;
+const axios = require('axios').default
+
+let serverURL = process.env.NODE_ENV == 'production'? window.location.protocol +'//'+ window.location.host : 'http://localhost:8080'
 
 const reportClient = axios.create({
-    baseURL: 'http://localhost:8080/api/v1'
+    baseURL: serverURL + '/api/v1'
 })
 
 export function getReports (callback, state, city, hospital, fromDate) {
