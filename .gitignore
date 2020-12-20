@@ -57,3 +57,4 @@ frontend/yarn-error.log*
 
 # VSCode Config Files
 frontend/.vscode
+frontend/.eslintcache
